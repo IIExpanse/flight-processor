@@ -5,20 +5,20 @@ import com.gridnine.testing.model.rule.FlightRule;
 import java.util.Collection;
 import java.util.Map;
 
-public abstract class MapRuleStorage<T extends FlightRule> implements RuleStorage<T> {
-    protected final Map<String, T> storage;
+public abstract class MappedRuleStorage<R extends FlightRule> implements RuleStorage<R> {
+    protected final Map<String, R> storage;
 
-    public MapRuleStorage(Map<String, T> storage) {
+    public MappedRuleStorage(Map<String, R> storage) {
         this.storage = storage;
     }
 
     @Override
-    public void addRule(T rule) {
+    public void addRule(R rule) {
         storage.put(rule.getName(), rule);
     }
 
     @Override
-    public void addRules(Collection<T> rules) {
+    public void addRules(Collection<R> rules) {
         rules.forEach(this::addRule);
     }
 
@@ -33,7 +33,7 @@ public abstract class MapRuleStorage<T extends FlightRule> implements RuleStorag
     }
 
     @Override
-    public Collection<T> getRules() {
+    public Collection<R> getRules() {
         return storage.values();
     }
 }

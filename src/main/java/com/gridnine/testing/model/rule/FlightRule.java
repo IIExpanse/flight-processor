@@ -13,13 +13,13 @@ public class FlightRule implements Predicate<Flight> {
         this.condition = condition;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public boolean test(Flight flight) {
         return condition.test(flight);
-    }
-
-    public String getName() {
-        return name;
     }
 
     @Override
@@ -35,5 +35,10 @@ public class FlightRule implements Predicate<Flight> {
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

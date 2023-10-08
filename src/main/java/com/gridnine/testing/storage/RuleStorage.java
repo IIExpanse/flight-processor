@@ -4,15 +4,15 @@ import com.gridnine.testing.model.rule.FlightRule;
 
 import java.util.Collection;
 
-public interface RuleStorage<T extends FlightRule> {
+public interface RuleStorage<R extends FlightRule> {
 
-    void addRule(T rule);
+    void addRule(R rule);
 
-    void addRules(Collection<T> rules);
+    void addRules(Collection<R> rules);
 
     boolean removeRule(String ruleName);
 
     boolean ruleExists(String ruleName);
 
-    Collection<T> getRules();
+    Collection<R> getRules();
 }

@@ -1,27 +1,26 @@
-package com.gridnine.testing.tester.impl;
+package com.gridnine.testing.tester;
 
 import com.gridnine.testing.model.flight.Flight;
 import com.gridnine.testing.model.rule.FlightRule;
-import com.gridnine.testing.storage.MapRuleStorage;
-import com.gridnine.testing.tester.FlightTester;
+import com.gridnine.testing.storage.RuleStorage;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class FlightTesterImpl implements FlightTester {
-    private final MapRuleStorage<FlightRule> storage;
+public abstract class AbstractFlightTester<R extends FlightRule> implements FlightTester<R> {
+    private final RuleStorage<R> storage;
 
-    public FlightTesterImpl(MapRuleStorage<FlightRule> storage) {
+    public AbstractFlightTester(RuleStorage<R> storage) {
         this.storage = storage;
     }
 
     @Override
-    public void addRule(FlightRule rule) {
+    public void addRule(R rule) {
         storage.addRule(rule);
     }
 
     @Override
-    public void addRules(Collection<FlightRule> rules) {
+    public void addRules(Collection<R> rules) {
         storage.addRules(rules);
     }
 
@@ -31,9 +30,9 @@ public class FlightTesterImpl implements FlightTester {
     }
 
     @Override
-    public Collection<Flight> filterFlights(Collection<Flight> collection) {
+    public Collection<Flight> filterFlights(Collection<Flight> collection, boolean returnMatching) {
         return collection.stream()
-                .filter(this::isMatching)
+                .filter(flight -> returnMatching == this.isMatching(flight))
                 .collect(Collectors.toList());
     }
 

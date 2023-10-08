@@ -5,13 +5,13 @@ import com.gridnine.testing.model.rule.FlightRule;
 
 import java.util.Collection;
 
-public interface FlightTester {
+public interface FlightTester<R extends FlightRule> {
 
-    void addRule(FlightRule rule);
+    void addRule(R rule);
 
     boolean removeRule(String name);
 
-    void addRules(Collection<FlightRule> rules);
+    void addRules(Collection<R> rules);
 
-    Collection<Flight> filterFlights(Collection<Flight> collection);
+    Collection<Flight> filterFlights(Collection<Flight> collection, boolean returnMatching);
 }
