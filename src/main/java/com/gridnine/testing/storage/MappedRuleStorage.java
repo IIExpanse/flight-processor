@@ -5,20 +5,23 @@ import com.gridnine.testing.model.rule.FlightRule;
 import java.util.Collection;
 import java.util.Map;
 
-public abstract class MappedRuleStorage<R extends FlightRule> implements RuleStorage<R> {
-    protected final Map<String, R> storage;
+/**
+ * Abstract class that defines a branch of implementations using Map structure for storing rules.
+ */
+public abstract class MappedRuleStorage implements RuleStorage {
+    protected final Map<String, FlightRule> storage;
 
-    public MappedRuleStorage(Map<String, R> storage) {
+    public MappedRuleStorage(Map<String, FlightRule> storage) {
         this.storage = storage;
     }
 
     @Override
-    public void addRule(R rule) {
+    public void addRule(FlightRule rule) {
         storage.put(rule.getName(), rule);
     }
 
     @Override
-    public void addRules(Collection<R> rules) {
+    public void addRules(Collection<FlightRule> rules) {
         rules.forEach(this::addRule);
     }
 
@@ -28,12 +31,17 @@ public abstract class MappedRuleStorage<R extends FlightRule> implements RuleSto
     }
 
     @Override
+    public void removeRules(Collection<String> ruleNames) {
+        ruleNames.forEach(this::removeRule);
+    }
+
+    @Override
     public boolean ruleExists(String ruleName) {
         return storage.containsKey(ruleName);
     }
 
     @Override
-    public Collection<R> getRules() {
+    public Collection<FlightRule> getRules() {
         return storage.values();
     }
 }

@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -53,6 +55,17 @@ public class UnorderedRuleStorageTest {
 
         storage.addRule(rule);
         assertTrue(storage.removeRule(rule.getName()));
+        assertTrue(storage.getRules().isEmpty());
+    }
+
+    @Test
+    public void removeRulesTest() {
+        Collection<FlightRule> collection = List.of(getDepartureBeforeArrivalRule(), getDepartureInFutureRule());
+
+        storage.addRules(collection);
+        storage.removeRules(collection.stream()
+                .map(FlightRule::getName)
+                .collect(Collectors.toList()));
         assertTrue(storage.getRules().isEmpty());
     }
 

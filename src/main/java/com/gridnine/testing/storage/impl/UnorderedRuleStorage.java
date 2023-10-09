@@ -1,11 +1,14 @@
 package com.gridnine.testing.storage.impl;
 
-import com.gridnine.testing.model.rule.FlightRule;
 import com.gridnine.testing.storage.MappedRuleStorage;
 
 import java.util.HashMap;
 
-public class UnorderedRuleStorage extends MappedRuleStorage<FlightRule> {
+/**
+ * Implementation that allows adding / removing rules for constant time,
+ *      but doesn't return them in any particular order.
+ */
+public class UnorderedRuleStorage extends MappedRuleStorage {
     public UnorderedRuleStorage() {
         super(new HashMap<>());
     }

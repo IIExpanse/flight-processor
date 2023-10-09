@@ -8,6 +8,10 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
+
+/**
+ * Factory class that returns 3 basic FlightRule's for testing purposes.
+ */
 public class RuleBuilder {
 
     public static Collection<FlightRule> createRules() {

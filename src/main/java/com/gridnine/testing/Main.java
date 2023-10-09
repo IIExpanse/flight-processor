@@ -4,6 +4,7 @@ import com.gridnine.testing.builder.FlightBuilder;
 import com.gridnine.testing.builder.RuleBuilder;
 import com.gridnine.testing.model.flight.Flight;
 import com.gridnine.testing.model.rule.FlightRule;
+import com.gridnine.testing.tester.FlightTester;
 import com.gridnine.testing.tester.impl.UnorderedFlightTester;
 
 import java.util.Collection;
@@ -11,7 +12,7 @@ import java.util.Collection;
 public class Main {
 
     public static void main(String[] args) {
-        UnorderedFlightTester tester = new UnorderedFlightTester();
+        FlightTester tester = new UnorderedFlightTester();
         Collection<Flight> testFlights = FlightBuilder.createFlights();
         Collection<FlightRule> testRules = RuleBuilder.createRules();
         System.out.println("Source: " + testFlights + "\n");

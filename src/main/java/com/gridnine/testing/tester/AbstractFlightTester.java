@@ -7,26 +7,34 @@ import com.gridnine.testing.storage.RuleStorage;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public abstract class AbstractFlightTester<R extends FlightRule> implements FlightTester<R> {
-    private final RuleStorage<R> storage;
+/**
+ * Abstract class that defines basic realization of FlightTester methods.
+ */
+public abstract class AbstractFlightTester implements FlightTester {
+    private final RuleStorage storage;
 
-    public AbstractFlightTester(RuleStorage<R> storage) {
+    public AbstractFlightTester(RuleStorage storage) {
         this.storage = storage;
     }
 
     @Override
-    public void addRule(R rule) {
+    public void addRule(FlightRule rule) {
         storage.addRule(rule);
     }
 
     @Override
-    public void addRules(Collection<R> rules) {
+    public void addRules(Collection<FlightRule> rules) {
         storage.addRules(rules);
     }
 
     @Override
     public boolean removeRule(String name) {
         return storage.removeRule(name);
+    }
+
+    @Override
+    public void removeRules(Collection<String> ruleNames) {
+        storage.removeRules(ruleNames);
     }
 
     @Override
